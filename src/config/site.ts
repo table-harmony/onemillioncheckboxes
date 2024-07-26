@@ -1,7 +1,7 @@
 export const siteConfig = {
-  name: "onemillioncheckboxes",
+  name: "One Million Checkboxes",
   url: "https://onemillioncheckboxes.vercel.app",
-  description: "One Million Checkboxes",
+  description: "One million checkboxes",
   links: {
     github: "https://github.com/table-harmony/onemillioncheckboxes",
   },

@@ -1,4 +1,6 @@
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { ConvexProvider } from "@/components/providers/convex-provider";
+import { ClerkProvider } from "@/components/providers/clerk-provider";
 
 export async function ContextProvider({
   children,
@@ -12,7 +14,9 @@ export async function ContextProvider({
       enableSystem
       disableTransitionOnChange
     >
-      {children}
+      <ClerkProvider>
+        <ConvexProvider>{children}</ConvexProvider>
+      </ClerkProvider>
     </ThemeProvider>
   );
 }

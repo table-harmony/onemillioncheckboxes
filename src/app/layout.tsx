@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Fredoka as FontSans } from "next/font/google";
+import { Poppins as FontSans } from "next/font/google";
 
 import { Viewport } from "next";
 import { siteConfig } from "@/config/site";
@@ -9,10 +9,10 @@ import { BASE_URL, createMetadata } from "@/utils/metadata";
 
 import { ContextProvider } from "@/components/providers/context-provider";
 import NextTopLoader from "nextjs-toploader";
-import { SiteFooter } from "@/components/site-footer";
 
 const fontSans = FontSans({
   subsets: ["latin"],
+  weight: ["500"],
   variable: "--font-sans",
 });
 
@@ -49,8 +49,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <ContextProvider>
           <div className="relative flex min-h-screen flex-col bg-background">
             <NextTopLoader showSpinner={false} />
-            <main className="flex-1">{children}</main>
-            <SiteFooter />
+            {children}
           </div>
         </ContextProvider>
       </body>
