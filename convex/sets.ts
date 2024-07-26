@@ -1,5 +1,5 @@
 import { v } from "convex/values";
-import { mutation, query } from "./_generated/server";
+import { internalMutation, mutation, query } from "./_generated/server";
 
 import { getCurrentUser } from "./users";
 import { assertRateLimit } from "./util";
@@ -58,5 +58,19 @@ export const getSet = query({
       .query("sets")
       .withIndex("by_index", (q) => q.eq("index", args.index))
       .first();
+  },
+});
+
+export const randomize = internalMutation({
+  async handler(ctx) {
+    const sets = await ctx.db.query("sets").collect();
+
+    sets.map(async (set) => {
+      const randomizedBitVector = Math.floor(
+        Math.random() * Math.pow(2, SET_LENGTH)
+      );
+
+      await ctx.db.patch(set._id, { bitVector: randomizedBitVector });
+    });
   },
 });
