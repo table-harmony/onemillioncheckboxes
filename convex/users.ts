@@ -115,3 +115,22 @@ export const getScoreboard = query({
     return topUsers;
   },
 });
+
+export const currentPosition = query({
+  async handler(ctx) {
+    const currentUser = await getCurrentUser(ctx, {});
+
+    if (!currentUser) return;
+
+    const allUsers = await ctx.db
+      .query("users")
+      .withIndex("by_record")
+      .order("desc")
+      .collect();
+
+    const position =
+      allUsers.findIndex((user) => user._id === currentUser._id) + 1;
+
+    return position;
+  },
+});

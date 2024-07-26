@@ -2,10 +2,6 @@ import { UserButton } from "@clerk/nextjs";
 
 import { ModeToggle } from "@/components/mode-toggle";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Button } from "./ui/button";
-import { GithubIcon } from "lucide-react";
-import Link from "next/link";
-import { siteConfig } from "@/config/site";
 
 export function SiteHeader() {
   return (
@@ -17,20 +13,9 @@ export function SiteHeader() {
             <Checkbox aria-label="header" /> &nbsp;s
           </span>
         </div>
-        <div className="flex items-center">
+        <div className="flex gap-2 items-center">
           <ModeToggle />
-          <Button size="icon" variant="ghost" aria-label="github" asChild>
-            <Link
-              rel="noreferrer"
-              target="_blank"
-              href={siteConfig.links.github}
-            >
-              <GithubIcon className="size-4" />
-            </Link>
-          </Button>
-          <div className="ml-2 flex items-center">
-            <UserButton />
-          </div>
+          <UserButton />
         </div>
       </div>
     </header>

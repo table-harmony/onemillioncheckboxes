@@ -1,26 +1,27 @@
 import {
   PageActions,
   PageHeader,
+  PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header";
-import { CheckboxGrid } from "./_components/checkbox-grid";
-import { Button } from "@/components/ui/button";
 
-import { siteConfig } from "@/config/site";
+import { Scoreboard } from "./scoreboard";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export default function Home() {
   return (
     <div className="container">
       <PageHeader>
-        <PageHeaderHeading>{siteConfig.name}</PageHeaderHeading>
+        <PageHeaderHeading>Scoreboard</PageHeaderHeading>
+        <PageHeaderDescription>Top 5 best checkboxers</PageHeaderDescription>
         <PageActions>
           <Button asChild>
-            <Link href="/scoreboard">Scoreboard</Link>
+            <Link href="/">Checkboxes</Link>
           </Button>
         </PageActions>
       </PageHeader>
-      <CheckboxGrid />
+      <Scoreboard />
     </div>
   );
 }
