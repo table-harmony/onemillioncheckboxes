@@ -5,8 +5,12 @@ import { api } from "../../../../convex/_generated/api";
 import { SET_LENGTH } from "../../../../convex/sets";
 
 import { Checkbox } from "@/components/ui/checkbox";
+import { useToast } from "@/components/ui/use-toast";
+import { ConvexError } from "convex/values";
 
 export function CheckboxItem({ index }: { index: number }) {
+  const { toast } = useToast();
+
   const setIndex = Math.floor(index / SET_LENGTH);
   const set = useQuery(api.sets.getSet, {
     index: setIndex,
@@ -44,7 +48,15 @@ export function CheckboxItem({ index }: { index: number }) {
         aria-label={`${index} checkbox`}
         checked={isChecked}
         onCheckedChange={(isChecked) => {
-          updateCheckbox({ index, isChecked: Number(isChecked) });
+          updateCheckbox({ index, isChecked: Number(isChecked) }).catch(
+            (error) => {
+              let message = "Something went wrong!";
+
+              if (error instanceof ConvexError) message = error.data;
+
+              toast({ description: message, variant: "destructive" });
+            }
+          );
         }}
       />
     </div>

@@ -1,4 +1,4 @@
-import { internalMutation, internalQuery } from "./_generated/server";
+import { internalMutation, internalQuery, query } from "./_generated/server";
 import { ConvexError, v } from "convex/values";
 
 import { getClerkId } from "./util";
@@ -66,6 +66,7 @@ export const createUser = internalMutation({
       name: args.name,
       email: args.email,
       image: args.image,
+      record: 0,
     });
   },
 });
@@ -87,6 +88,7 @@ export const updateUser = internalMutation({
   args: {
     clerkId: v.string(),
     image: v.optional(v.string()),
+    record: v.optional(v.number()),
   },
   async handler(ctx, args) {
     const user = await getUserByClerkId(ctx, { clerkId: args.clerkId });
@@ -97,6 +99,19 @@ export const updateUser = internalMutation({
 
     await ctx.db.patch(user._id, {
       image: args.image,
+      record: args.record,
     });
+  },
+});
+
+export const getScoreboard = query({
+  async handler(ctx) {
+    const topUsers = await ctx.db
+      .query("users")
+      .withIndex("by_record")
+      .order("desc")
+      .take(5);
+
+    return topUsers;
   },
 });

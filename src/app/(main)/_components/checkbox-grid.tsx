@@ -6,20 +6,22 @@ import { useMeasure } from "react-use";
 import { CheckboxItem } from "./checkbox-item";
 
 function Cell({
+  data,
   columnIndex,
   rowIndex,
   style,
-  data,
 }: {
+  data: { columnCount: number };
   columnIndex: number;
   rowIndex: number;
   style: React.CSSProperties;
-  data: { columnCount: number };
 }) {
   const index = rowIndex * data.columnCount + columnIndex;
 
+  if (index > NUM_CHECKBOXES) return null;
+
   return (
-    <div style={style}>
+    <div key={index} style={style}>
       <CheckboxItem index={index} />
     </div>
   );
@@ -39,10 +41,10 @@ export function CheckboxGrid() {
       <Grid
         width={width}
         height={height}
-        columnCount={columnCount}
-        rowCount={Math.ceil(NUM_CHECKBOXES / columnCount)}
-        columnWidth={COLUMN_WIDTH}
         rowHeight={ROW_HEIGHT}
+        columnWidth={COLUMN_WIDTH}
+        rowCount={Math.ceil(NUM_CHECKBOXES / columnCount)}
+        columnCount={columnCount}
         itemData={{
           columnCount: columnCount,
         }}

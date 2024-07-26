@@ -1,42 +1,18 @@
+import { ConvexError } from "convex/values";
 import { ActionCtx, MutationCtx, QueryCtx } from "./_generated/server";
 
-const LIMIT_PER_SECOND = 5;
+const LIMIT_PER_SECOND = 1;
 
 export async function rateLimitByKey(ctx: MutationCtx, key: string) {
-  const rateLimit = await ctx.db
-    .query("rateLimits")
-    .withIndex("by_key", (q) => q.eq("key", key))
-    .first();
-
-  if (!rateLimit) {
-    await ctx.db.insert("rateLimits", {
-      key,
-      value: 1,
-      resetOn: Date.now() + 1000,
-    });
-  } else {
-    if (rateLimit.value >= LIMIT_PER_SECOND) {
-      if (rateLimit.resetOn < Date.now()) {
-        rateLimit.value = 0;
-        rateLimit.resetOn = Date.now() + 1000;
-      } else {
-        return true;
-      }
-    }
-    rateLimit.value++;
-    await ctx.db.patch(rateLimit._id, {
-      value: rateLimit.value,
-      resetOn: rateLimit.resetOn,
-    });
-  }
-  return false;
+  //TODO: rate limit
+  return true;
 }
 
 export async function assertRateLimit(ctx: MutationCtx, key: string) {
   const success = await rateLimitByKey(ctx, key);
 
   if (!success) {
-    throw new Error("Rate limit exceeded");
+    throw new ConvexError("Rate limit exceeded");
   }
 }
 

@@ -7,9 +7,11 @@ export default defineSchema({
     email: v.string(),
     name: v.optional(v.string()),
     image: v.optional(v.string()),
+    record: v.number(),
   })
     .index("by_clerkId", ["clerkId"])
-    .index("by_email", ["email"]),
+    .index("by_email", ["email"])
+    .index("by_record", ["record"]),
   sets: defineTable({
     index: v.number(),
     bitVector: v.number(),

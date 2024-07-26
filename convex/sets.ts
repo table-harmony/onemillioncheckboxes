@@ -16,7 +16,7 @@ export const updateCheckbox = mutation({
 
     if (!user) return;
 
-    //TODO: assert rate limit
+    await assertRateLimit(ctx, user._id);
 
     const setIndex = Math.floor(args.index / SET_LENGTH);
 
@@ -35,6 +35,9 @@ export const updateCheckbox = mutation({
     } else {
       if (args.isChecked) {
         set.bitVector |= bit;
+        await ctx.db.patch(user._id, {
+          record: user.record + 1,
+        });
       } else {
         set.bitVector &= ~bit;
       }
