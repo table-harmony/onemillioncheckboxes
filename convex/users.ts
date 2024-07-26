@@ -1,9 +1,9 @@
-import { internalMutation, internalQuery, query } from "./_generated/server";
+import { internalMutation, internalQuery } from "./_generated/server";
 import { ConvexError, v } from "convex/values";
 
 import { getClerkId } from "./util";
 
-export const getCurrentUser = query({
+export const getCurrentUser = internalQuery({
   async handler(ctx) {
     const clerkId = await getClerkId(ctx);
 
