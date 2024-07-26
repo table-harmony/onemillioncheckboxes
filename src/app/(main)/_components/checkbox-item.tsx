@@ -1,11 +1,10 @@
 "use client";
 
 import { useMutation, useQuery } from "convex/react";
-import { api } from "../../../convex/_generated/api";
-import { SET_LENGTH } from "../../../convex/sets";
+import { api } from "../../../../convex/_generated/api";
+import { SET_LENGTH } from "../../../../convex/sets";
 
 import { Checkbox } from "@/components/ui/checkbox";
-import type { CheckedState } from "@radix-ui/react-checkbox";
 
 export function CheckboxItem({ index }: { index: number }) {
   const setIndex = Math.floor(index / SET_LENGTH);
@@ -39,16 +38,14 @@ export function CheckboxItem({ index }: { index: number }) {
     }
   });
 
-  const onChange = (isChecked: CheckedState) => {
-    updateCheckbox({ index, isChecked: Number(isChecked) });
-  };
-
   return (
     <div>
       <Checkbox
         aria-label={`${index} checkbox`}
         checked={isChecked}
-        onCheckedChange={onChange}
+        onCheckedChange={(isChecked) => {
+          updateCheckbox({ index, isChecked: Number(isChecked) });
+        }}
       />
     </div>
   );

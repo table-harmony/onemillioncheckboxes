@@ -1,9 +1,9 @@
-import { CheckboxItem } from "./checkbox-item";
+import { CheckboxGrid } from "./_components/checkbox-grid";
 
 export default function Home() {
   return (
     <div className="container">
-      <CheckboxItem index={0} />
+      <CheckboxGrid />
     </div>
   );
 }
