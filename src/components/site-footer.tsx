@@ -24,6 +24,7 @@ export function SiteFooter() {
           >
             eieio
           </Link>
+          .
         </p>
       </div>
     </footer>

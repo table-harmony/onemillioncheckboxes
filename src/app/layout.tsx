@@ -12,7 +12,7 @@ import NextTopLoader from "nextjs-toploader";
 
 const fontSans = FontSans({
   subsets: ["latin"],
-  weight: ["500"],
+  weight: ["400"],
   variable: "--font-sans",
 });
 
