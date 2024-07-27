@@ -43,22 +43,20 @@ export function CheckboxItem({ index }: { index: number }) {
   });
 
   return (
-    <div>
-      <Checkbox
-        aria-label={`${index} checkbox`}
-        checked={isChecked}
-        onCheckedChange={(isChecked) => {
-          updateCheckbox({ index, isChecked: Number(isChecked) }).catch(
-            (error) => {
-              let message = "Something went wrong!";
+    <Checkbox
+      aria-label={`${index} checkbox`}
+      checked={isChecked}
+      onCheckedChange={(isChecked) => {
+        updateCheckbox({ index, isChecked: Number(isChecked) }).catch(
+          (error) => {
+            let message = "Something went wrong!";
 
-              if (error instanceof ConvexError) message = error.data;
+            if (error instanceof ConvexError) message = error.data;
 
-              toast({ description: message, variant: "destructive" });
-            }
-          );
-        }}
-      />
-    </div>
+            toast({ description: message, variant: "destructive" });
+          }
+        );
+      }}
+    />
   );
 }

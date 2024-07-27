@@ -1,6 +1,7 @@
 import {
   PageActions,
   PageHeader,
+  PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header";
 import { CheckboxGrid } from "./_components/checkbox-grid";
@@ -14,6 +15,7 @@ export default function Home() {
     <div className="container">
       <PageHeader>
         <PageHeaderHeading>{siteConfig.name}</PageHeaderHeading>
+        <PageHeaderDescription></PageHeaderDescription>
         <PageActions>
           <Button asChild>
             <Link href="/scoreboard">Scoreboard</Link>

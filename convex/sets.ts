@@ -4,7 +4,7 @@ import { internalMutation, mutation, query } from "./_generated/server";
 import { getCurrentUser } from "./users";
 import { assertRateLimit } from "./util";
 
-export const SET_LENGTH = 64;
+export const SET_LENGTH = 32;
 
 export const updateCheckbox = mutation({
   args: {
