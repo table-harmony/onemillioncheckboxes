@@ -21,14 +21,6 @@ function Cell({
 
   if (index > NUM_CHECKBOXES) return null;
 
-  if (index < 100) console.log(index);
-
-  //return (
-  //  <div style={style}>
-  //    {index}, {Math.floor(index / SET_LENGTH)}
-  //  </div>
-  //);
-
   return (
     <div key={index} style={style}>
       <CheckboxItem index={index} />

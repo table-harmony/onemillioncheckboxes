@@ -74,3 +74,25 @@ export const randomize = internalMutation({
     });
   },
 });
+
+//TODO: doesn't work
+export const getChecked = query({
+  async handler(ctx) {
+    const sets = await ctx.db.query("sets").collect();
+
+    let numChecked = 0;
+
+    sets.forEach((set) => {
+      let bitVector = set.bitVector;
+
+      while (bitVector > 0) {
+        if (bitVector & 1) {
+          numChecked++;
+        }
+        bitVector >>= 1;
+      }
+    });
+
+    return numChecked;
+  },
+});

@@ -1,7 +1,7 @@
 import { ConvexError } from "convex/values";
 import { ActionCtx, MutationCtx, QueryCtx } from "./_generated/server";
 
-const LIMIT_PER_SECOND = 1;
+const LIMIT_PER_SECOND = 10;
 
 export async function rateLimitByKey(ctx: MutationCtx, key: string) {
   //TODO: rate limit
