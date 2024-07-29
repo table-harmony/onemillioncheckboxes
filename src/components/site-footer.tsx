@@ -19,7 +19,7 @@ export function SiteFooter() {
           </Link>
           . Inspired from{" "}
           <Link
-            href="https://eieio.io"
+            href="https://eieio.games/"
             target="_blank"
             rel="noreferrer"
             className="font-semibold underline underline-offset-4"
