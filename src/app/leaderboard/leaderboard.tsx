@@ -50,7 +50,7 @@ export function Leaderboard() {
 
               {/** Info */}
               <div className="flex flex-col items-center justify-center gap-0.5">
-                <span className="xs:text-sm text-ellipsis text-xs font-semibold md:text-lg">
+                <span className="text-ellipsis text-sm font-semibold md:text-lg lg:text-xl">
                   {users?.at(1)?.name}
                 </span>
 
@@ -91,7 +91,7 @@ export function Leaderboard() {
 
               {/** Info */}
               <div className="flex flex-col items-center justify-center gap-0.5">
-                <span className="xs:text-sm text-ellipsis text-xs font-semibold md:text-lg">
+                <span className="text-ellipsis text-sm font-semibold md:text-lg lg:text-xl">
                   {users?.at(0)?.name}
                 </span>
 
@@ -132,7 +132,7 @@ export function Leaderboard() {
 
               {/** Info */}
               <div className="flex flex-col items-center justify-center gap-0.5">
-                <span className="xs:text-sm text-ellipsis text-xs font-semibold md:text-lg">
+                <span className="text-ellipsis text-sm font-semibold md:text-lg">
                   {users?.at(2)?.name}
                 </span>
 

@@ -47,6 +47,7 @@ export function MenuButton() {
             Leaderboard
           </Link>
         </Button>
+        <ModeToggle variant="button" />
       </div>
     );
 
