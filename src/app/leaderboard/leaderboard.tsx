@@ -4,34 +4,35 @@ import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
-import { CrownIcon, SquareCheckIcon } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
-  PageActions,
-  PageHeader,
-  PageHeaderHeading,
-} from "@/components/page-header";
-import Link from "next/link";
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  ChevronsLeftIcon,
+  ChevronsRightIcon,
+  CrownIcon,
+  SquareCheckIcon,
+} from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
+
+const PER_PAGE = 5;
 
 export function Leaderboard() {
   const users = useQuery(api.users.getScoreboard);
+  const [page, setPage] = useState(0);
+
+  const totalPages = Math.ceil((users?.length || 0) / PER_PAGE);
+
+  const startIndex = page * PER_PAGE;
+  const endIndex = startIndex + PER_PAGE;
 
   return (
-    <div className="container max-w-5xl">
-      <PageHeader>
-        <PageHeaderHeading>Leaderboard</PageHeaderHeading>
-        <PageActions>
-          <Button asChild>
-            <Link href="/">Checkboxes</Link>
-          </Button>
-        </PageActions>
-      </PageHeader>
-
+    <div className="mx-auto max-w-5xl">
       {/** Podium */}
-      <div className="mb-10 flex items-end justify-center gap-2 p-4 md:gap-4 lg:p-6">
+      <div className="mb-10 flex flex-col items-end justify-center gap-2 p-4 md:flex-row md:gap-4 lg:p-6">
         {/** Second place */}
-        <div className="flex w-full flex-col items-center">
+        <div className="order-2 flex w-full flex-col items-center md:order-1">
           {/** User data */}
           <div className="flex w-full items-center justify-center border-b-4 border-muted-foreground/50">
             <div className="flex w-[96%] flex-col items-center gap-3 bg-gradient-to-t from-neutral-300/20 to-100% py-4 dark:from-neutral-300/10">
@@ -72,7 +73,7 @@ export function Leaderboard() {
         </div>
 
         {/** First place */}
-        <div className="flex w-full flex-col items-center">
+        <div className="order-1 flex w-full flex-col items-center md:order-2">
           {/** User data */}
           <div className="flex w-full items-center justify-center border-b-4 border-muted-foreground/50">
             <div className="flex w-[96%] flex-col items-center gap-3 bg-gradient-to-t from-yellow-500/5 to-100% py-4 dark:from-yellow-500/10">
@@ -113,7 +114,7 @@ export function Leaderboard() {
         </div>
 
         {/** Third place */}
-        <div className="flex w-full flex-col items-center">
+        <div className="order-3 flex w-full flex-col items-center">
           {/** User data */}
           <div className="flex w-full items-center justify-center border-b-4 border-muted-foreground/50">
             <div className="flex w-[96%] flex-col items-center gap-3 bg-gradient-to-t from-blue-300/20 to-100% py-4 dark:from-blue-300/10">
@@ -154,16 +155,59 @@ export function Leaderboard() {
         </div>
       </div>
 
+      {/** Toolbar */}
+      <div className="mb-10 flex justify-center gap-2">
+        <Button
+          size="icon"
+          onClick={() => setPage(0)}
+          disabled={page === 0}
+          variant="outline"
+        >
+          <span className="sr-only">first</span>
+          <ChevronsLeftIcon className="size-4" />
+        </Button>
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={() => setPage((currentPage) => Math.max(currentPage - 1, 0))}
+          disabled={page === 0}
+        >
+          <span className="sr-only">prev</span>
+          <ChevronLeftIcon className="size-4" />
+        </Button>
+        <Button
+          size="icon"
+          onClick={() =>
+            setPage((currentPage) => Math.min(currentPage + 1, totalPages - 1))
+          }
+          disabled={page === totalPages - 1}
+          variant="outline"
+        >
+          <span className="sr-only">next</span>
+          <ChevronRightIcon className="size-4" />
+        </Button>
+        <Button
+          size="icon"
+          onClick={() => setPage(totalPages - 1)}
+          disabled={page === totalPages - 1}
+          variant="outline"
+        >
+          <span className="sr-only">last</span>
+          <ChevronsRightIcon className="size-4" />
+        </Button>
+      </div>
+
+      {/** Table */}
       <Table className="mb-10">
         <TableBody>
-          {users?.slice(3)?.map((user, index) => (
+          {users?.slice(startIndex, endIndex)?.map((user, index) => (
             <TableRow key={user._id}>
               <TableCell className="flex items-center gap-8">
                 <div className="space-x-0.5">
                   <span className="text-muted-foreground">#</span>
-                  <span className="font-bold">{index + 4}</span>
+                  <span className="font-bold">{startIndex + index + 1}</span>
                 </div>
-                {user.name}
+                <span className="text-ellipsis">{user.name}</span>
               </TableCell>
               <TableCell>
                 <div className="flex items-center gap-1">

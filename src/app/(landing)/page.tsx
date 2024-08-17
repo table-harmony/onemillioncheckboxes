@@ -1,5 +1,4 @@
 import {
-  PageActions,
   PageHeader,
   PageHeaderDescription,
   PageHeaderHeading,
@@ -7,20 +6,13 @@ import {
 import { CheckboxGrid } from "./_components/checkbox-grid";
 
 import { siteConfig } from "@/config/site";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 
 export default function Home() {
   return (
     <div className="container">
-      <PageHeader>
+      <PageHeader className="flex items-center justify-center text-center">
         <PageHeaderHeading>{siteConfig.name}</PageHeaderHeading>
-        <PageHeaderDescription>I have counted...</PageHeaderDescription>
-        <PageActions>
-          <Button asChild>
-            <Link href="/leaderboard">Leaderboard</Link>
-          </Button>
-        </PageActions>
+        <PageHeaderDescription>Dont worry, I counted</PageHeaderDescription>
       </PageHeader>
       <CheckboxGrid />
     </div>

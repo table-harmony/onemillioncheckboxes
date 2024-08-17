@@ -1,23 +1,19 @@
-import { UserButton } from "@clerk/nextjs";
-
-import { ModeToggle } from "@/components/mode-toggle";
 import { Checkbox } from "@/components/ui/checkbox";
+
+import { MenuButton } from "./menu-button";
 
 export function SiteHeader() {
   return (
-    <header className="sticky mb-4 top-0 z-50 w-full border-b border-border/40 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="top-0 z-50 mb-4 w-full border-b border-border/40 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 justify-between">
         <div className="flex items-center gap-2">
-          <span className="text-lg flex mr-2 items-center font-bold">
+          <span className="mr-2 flex items-center text-lg font-bold">
             One Million &nbsp;
             <Checkbox aria-label="header" />
             &nbsp;s
           </span>
         </div>
-        <div className="flex gap-2 items-center">
-          <ModeToggle />
-          <UserButton />
-        </div>
+        <MenuButton />
       </div>
     </header>
   );
