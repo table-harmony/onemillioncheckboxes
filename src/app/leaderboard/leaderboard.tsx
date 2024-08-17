@@ -30,7 +30,7 @@ export function Leaderboard() {
   return (
     <div className="mx-auto max-w-5xl">
       {/** Podium */}
-      <div className="mb-10 flex flex-col items-end justify-center gap-2 p-4 md:flex-row md:gap-4 lg:p-6">
+      <div className="mb-10 flex flex-col items-end justify-center gap-10 p-4 md:flex-row md:gap-4 lg:p-6">
         {/** Second place */}
         <div className="order-2 flex w-full flex-col items-center md:order-1">
           {/** User data */}
