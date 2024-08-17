@@ -67,3 +67,11 @@
     @apply bg-background text-foreground;
   }
 }
+
+.bg-dotted-pattern {
+  background-image: radial-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 0);
+  background-position: 50%;
+  background-size: 1.1rem 1.1rem;
+  background-attachment: fixed;
+  margin: 0px;
+}

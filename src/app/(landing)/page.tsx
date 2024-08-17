@@ -1,12 +1,13 @@
 import {
   PageActions,
   PageHeader,
+  PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header";
 import { CheckboxGrid } from "./_components/checkbox-grid";
-import { Button } from "@/components/ui/button";
 
 import { siteConfig } from "@/config/site";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export default function Home() {
@@ -14,9 +15,10 @@ export default function Home() {
     <div className="container">
       <PageHeader>
         <PageHeaderHeading>{siteConfig.name}</PageHeaderHeading>
+        <PageHeaderDescription>I have counted...</PageHeaderDescription>
         <PageActions>
           <Button asChild>
-            <Link href="/scoreboard">Scoreboard</Link>
+            <Link href="/leaderboard">Leaderboard</Link>
           </Button>
         </PageActions>
       </PageHeader>

@@ -7,14 +7,6 @@ import { SET_LENGTH } from "../../../../convex/sets";
 import { Checkbox } from "@/components/ui/checkbox";
 
 export function CheckboxItem({ index }: { index: number }) {
-  const setIndex = Math.floor(index / SET_LENGTH);
-  const set = useQuery(api.sets.getSet, {
-    index: setIndex,
-  });
-
-  const bit = 1 << index % SET_LENGTH;
-  const isChecked = set ? (set.bitVector & bit) !== 0 : false;
-
   const updateCheckbox = useMutation(
     api.sets.updateCheckbox
   ).withOptimisticUpdate((localStore) => {
@@ -37,6 +29,14 @@ export function CheckboxItem({ index }: { index: number }) {
       );
     }
   });
+
+  const setIndex = Math.floor(index / SET_LENGTH);
+  const set = useQuery(api.sets.getSet, {
+    index: setIndex,
+  });
+
+  const bit = 1 << index % SET_LENGTH;
+  const isChecked = set ? (set.bitVector & bit) !== 0 : false;
 
   return (
     <Checkbox
