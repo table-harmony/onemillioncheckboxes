@@ -4,27 +4,18 @@ import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  ChevronsLeftIcon,
-  ChevronsRightIcon,
-  CrownIcon,
-  SquareCheckIcon,
-} from "lucide-react";
+import { CrownIcon, SquareCheckIcon } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { AdvancedPagination } from "@/components/advanced-pagination";
 
 const PER_PAGE = 5;
 
-export function Leaderboard() {
+export function Leaderboard({ page }: { page: number }) {
   const users = useQuery(api.users.getScoreboard);
-  const [page, setPage] = useState(0);
 
   const totalPages = Math.ceil((users?.length || 0) / PER_PAGE);
 
-  const startIndex = page * PER_PAGE;
+  const startIndex = (page - 1) * PER_PAGE;
   const endIndex = startIndex + PER_PAGE;
 
   return (
@@ -155,48 +146,6 @@ export function Leaderboard() {
         </div>
       </div>
 
-      {/** Toolbar */}
-      <div className="mb-10 flex justify-center gap-2">
-        <Button
-          size="icon"
-          onClick={() => setPage(0)}
-          disabled={page === 0}
-          variant="outline"
-        >
-          <span className="sr-only">first</span>
-          <ChevronsLeftIcon className="size-4" />
-        </Button>
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={() => setPage((currentPage) => Math.max(currentPage - 1, 0))}
-          disabled={page === 0}
-        >
-          <span className="sr-only">prev</span>
-          <ChevronLeftIcon className="size-4" />
-        </Button>
-        <Button
-          size="icon"
-          onClick={() =>
-            setPage((currentPage) => Math.min(currentPage + 1, totalPages - 1))
-          }
-          disabled={page === totalPages - 1}
-          variant="outline"
-        >
-          <span className="sr-only">next</span>
-          <ChevronRightIcon className="size-4" />
-        </Button>
-        <Button
-          size="icon"
-          onClick={() => setPage(totalPages - 1)}
-          disabled={page === totalPages - 1}
-          variant="outline"
-        >
-          <span className="sr-only">last</span>
-          <ChevronsRightIcon className="size-4" />
-        </Button>
-      </div>
-
       {/** Table */}
       <Table className="mb-10">
         <TableBody>
@@ -219,6 +168,8 @@ export function Leaderboard() {
           ))}
         </TableBody>
       </Table>
+
+      <AdvancedPagination page={page} totalPages={totalPages} />
     </div>
   );
 }
