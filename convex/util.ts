@@ -18,7 +18,7 @@ export async function assertRateLimit(ctx: MutationCtx, key: string) {
 
 export function formatName(
   firstName?: string | null,
-  lastName?: string | null
+  lastName?: string | null,
 ) {
   firstName = firstName ?? "";
   lastName = lastName ?? "";
@@ -30,5 +30,6 @@ export function formatName(
 }
 
 export async function getClerkId(ctx: QueryCtx | ActionCtx | MutationCtx) {
-  return (await ctx.auth.getUserIdentity())?.subject;
+  const clerkId = (await ctx.auth.getUserIdentity())?.subject;
+  return clerkId;
 }

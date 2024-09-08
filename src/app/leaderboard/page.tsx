@@ -19,6 +19,7 @@ export default function LeaderboardPage({
         <PageHeaderHeading>Leaderboard</PageHeaderHeading>
         <PageHeaderDescription>Our greatest checkboxers</PageHeaderDescription>
       </PageHeader>
+
       <Leaderboard page={page} />
     </div>
   );
