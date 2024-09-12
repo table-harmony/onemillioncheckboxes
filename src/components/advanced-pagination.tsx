@@ -18,7 +18,7 @@ export function AdvancedPagination({
   page: number;
   totalPages: number;
 }) {
-  const searchParams = useSearchParams();
+  const searchParams = useSearchParams().toString();
   const pathname = usePathname();
   const { replace } = useRouter();
 
